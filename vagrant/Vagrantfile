@@ -1,0 +1,25 @@
+#This is a test Vagrantfile for minimal config of Centos box. You can based of this script for your basic deploy
+
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+VAGRANTFILE_API_VERSION = "2"
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  
+   config.vm.define :debiantest do |config|
+   
+   config.vm.box = 'vagrant-debian-wheezy-x64.box'
+   config.vm.box_url = 'https://github.com/pserrano/Vagrant-Debian/releases/download/7.0.1/vagrant-debian-wheezy-x64.box'
+    
+    # Virtualbox VM configuration
+    config.vm.provider 'virtualbox' do |v|
+      v.customize ['modifyvm', :id, '--name', 'debian7-test']
+      v.customize ['modifyvm', :id, '--cpus', '1']
+      v.customize ['modifyvm', :id, '--memory', 256]
+      v.customize ['modifyvm', :id, '--ioapic', 'off']
+      v.customize ['modifyvm', :id, '--nictype1', 'virtio']
+      v.customize ['modifyvm', :id, '--nictype2', 'virtio']
+      v.customize ['modifyvm', :id, '--natdnshostresolver1', 'on']
+    end
+end
+end
